@@ -1,0 +1,166 @@
+{
+  "proxy_enabled": false,
+  "proxies": {
+    "http": "http://127.0.0.1:1082",
+    "https": "http://127.0.0.1:1082"
+  },
+  "ai_config": {
+    "enabled": true,
+    "api_key": "",
+    "base_url": "https://api.minimax.chat/anthropic",
+    "model": "MiniMax-M2.7",
+    "prompt_file": "prompt.txt"
+  },
+  "feeds": [
+    {
+      "id": "xiaoheihe_news",
+      "name": "小黑盒游戏新闻",
+      "url": "https://rsshub.app/xiaoheihe/news",
+      "enabled": true
+    },
+    {
+      "id": "gcores_news",
+      "name": "机核网资讯",
+      "url": "https://rsshub.rssforever.com/gcores/news",
+      "enabled": true
+    },
+    {
+      "id": "3dmgame_news",
+      "name": "3DMGame",
+      "url": "https://rsshub.rssforever.com/3dmgame/news",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_pc",
+      "name": "GamerSky资讯单机电玩",
+      "url": "https://rsshub.rssforever.com/gamersky/news/pc",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_ns",
+      "name": "GamerSky资讯NS",
+      "url": "https://rsshub.rssforever.com/gamersky/news/ns",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_mobile",
+      "name": "GamerSky资讯手游",
+      "url": "https://rsshub.rssforever.com/gamersky/news/mobile",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_web",
+      "name": "GamerSky资讯网游",
+      "url": "https://rsshub.rssforever.com/gamersky/news/web",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_industry",
+      "name": "GamerSky资讯业界",
+      "url": "https://rsshub.rssforever.com/gamersky/news/industry",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_hardware",
+      "name": "GamerSky资讯硬件",
+      "url": "https://rsshub.rssforever.com/gamersky/news/hardware",
+      "enabled": true
+    },
+    {
+      "id": "gamersky_tech",
+      "name": "GamerSky资讯科技",
+      "url": "https://rsshub.rssforever.com/gamersky/news/tech",
+      "enabled": true
+    },
+    {
+      "id": "diershoubing_news",
+      "name": "二柄 APP新闻",
+      "url": "https://rsshub.rssforever.com/diershoubing/news",
+      "enabled": true
+    },
+    {
+      "id": "yxrb_info",
+      "name": "游戏日报资讯",
+      "url": "https://rsshub.rssforever.com/yxrb/info",
+      "enabled": true
+    },
+    {
+      "id": "tgbus_news",
+      "name": "电玩巴士最新资讯",
+      "url": "https://rsshub.rssforever.com/tgbus/list/news",
+      "enabled": true
+    },
+    {
+      "id": "tgbus_hardware",
+      "name": "电玩巴士硬件资讯",
+      "url": "https://rsshub.rssforever.com/tgbus/list/hardware",
+      "enabled": true
+    },
+    {
+      "id": "famitsu_new",
+      "name": "famitsu 新着",
+      "url": "https://rsshub.rssforever.com/famitsu/category/new-article",
+      "enabled": true
+    },
+    {
+      "id": "gamegene_news",
+      "name": "游戏基因",
+      "url": "https://rsshub.rssforever.com/gamegene/news",
+      "enabled": true
+    },
+    {
+      "id": "ign_games_all",
+      "name": "IGNGameArticles",
+      "url": "https://feeds.feedburner.com/ign/games-all",
+      "enabled": true
+    },
+    {
+      "id": "ign_tech_articles",
+      "name": "IGNTechArticles",
+      "url": "https://feeds.feedburner.com/ign/tech-articles",
+      "enabled": true
+    },
+    {
+      "id": "gamespot_all_news",
+      "name": "GameSpotAllNews",
+      "url": "https://www.gamespot.com/feeds/news",
+      "enabled": true
+    },
+    {
+      "id": "gamespot_game_news",
+      "name": "GameSpotGameNews",
+      "url": "https://www.gamespot.com/feeds/game-news",
+      "enabled": true
+    },
+    {
+      "id": "eurogamer_news",
+      "name": "Eurogamer",
+      "url": "https://www.eurogamer.net/feed/news",
+      "enabled": true
+    },
+    {
+      "id": "gamesindustry_news",
+      "name": "GamesIndustry.biz",
+      "url": "https://www.gamesindustry.biz/feed/news",
+      "enabled": true
+    },
+    {
+      "id": "polygon_news",
+      "name": "PolyGon",
+      "url": "https://www.polygon.com/feed/news",
+      "enabled": true
+    },
+    {
+      "id": "kotaku_rss",
+      "name": "Kotaku",
+      "url": "https://kotaku.com/rss",
+      "enabled": true
+    },
+    {
+      "id": "pcgamer_rss",
+      "name": "PCGamer",
+      "url": "https://www.pcgamer.com/rss",
+      "enabled": true
+    }
+  ]
+}

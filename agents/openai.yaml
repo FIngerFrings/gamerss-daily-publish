@@ -1,0 +1,4 @@
+interface:
+  display_name: "GameRSS Daily Publish"
+  short_description: "Run GameRSS daily news and publish to Xiaohongshu"
+  default_prompt: "Use $gamerss-daily-publish to fetch daily game news with GameRSS and publish it to Xiaohongshu."
