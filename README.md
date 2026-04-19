@@ -1,6 +1,6 @@
 # gamerss-daily-publish
 
-一个可分享的 Codex skill，用来自动完成这条链路：
+一个可分享的 agent skill，用来自动完成这条链路：
 
 `抓取每日游戏资讯 -> 生成图文卡片 -> 生成小红书正文 -> 发布到小红书`
 
@@ -8,7 +8,7 @@
 
 ## 这是什么项目
 
-`gamerss-daily-publish` 本质上是一个面向 Codex 的自动化 skill，适合这些场景：
+`gamerss-daily-publish` 本质上是一个可复用的自动化 skill，适合这些场景：
 
 - 每日抓取游戏资讯并生成图文内容
 - 检查小红书登录状态后直接发布
@@ -60,7 +60,7 @@
 
 ## 怎么安装这个 skill
 
-### 方式一：直接复制到 Codex skills 目录
+### 方式一：直接复制到本地 skills 目录
 
 ```bash
 cp -R gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
@@ -74,7 +74,7 @@ cp -R gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
 ln -s /abs/path/to/gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
 ```
 
-安装完成后，重启 Codex，让它重新加载 skill。
+安装完成后，重启你的 agent 运行环境，让它重新加载 skill。
 
 ## 怎么使用
 
