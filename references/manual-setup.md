@@ -6,13 +6,15 @@
 
 `xiaohongshu-skills` 依赖浏览器扩展 `XHS Bridge`。
 
+这个 skill 已经内置了一份扩展副本，也会在运行时同步到 `xiaohongshu-skills/extension`。
+
 扩展目录通常位于：
 
-`$CODEX_HOME/skills/xiaohongshu-skills/extension`
+`$AGENT_HOME/skills/xiaohongshu-skills/extension`
 
-默认本机路径：
+如果未设置 `AGENT_HOME`，默认路径是：
 
-`~/.codex/skills/xiaohongshu-skills/extension`
+`~/.agent-home/skills/xiaohongshu-skills/extension`
 
 安装步骤：
 
@@ -28,7 +30,8 @@
 扩展可用后，运行：
 
 ```bash
-cd ~/.codex/skills/xiaohongshu-skills
+export AGENT_HOME="${AGENT_HOME:-$HOME/.agent-home}"
+cd "$AGENT_HOME/skills/xiaohongshu-skills"
 uv run python scripts/cli.py check-login
 ```
 

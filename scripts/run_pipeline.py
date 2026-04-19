@@ -22,6 +22,7 @@ XHS_SKILL_REPO = "autoclaw-cc/xiaohongshu-skills"
 XHS_SKILL_NAME = "xiaohongshu-skills"
 BUNDLED_TEMPLATE_DIR = "assets/gamerss-template"
 XHS_PATCH_DIR = "assets/xhs-patches"
+XHS_EXTENSION_DIR = "assets/xhs-extension"
 
 
 def run(cmd: list[str], *, cwd: Path | None = None, env: dict[str, str] | None = None) -> subprocess.CompletedProcess[str]:
@@ -56,8 +57,12 @@ def ensure_text(value: str | bytes | None) -> str:
     return value
 
 
-def codex_home() -> Path:
-    return Path(os.environ.get("CODEX_HOME", str(Path.home() / ".codex"))).expanduser()
+def agent_home() -> Path:
+    home = os.environ.get("AGENT_HOME", "").strip()
+    if home:
+        return Path(home).expanduser()
+
+    return Path.home() / ".agent-home"
 
 
 def skill_root() -> Path:
@@ -72,11 +77,8 @@ def xhs_patch_root() -> Path:
     return skill_root() / XHS_PATCH_DIR
 
 
-def find_repo_root(start: Path) -> Path | None:
-    for current in [start, *start.parents]:
-        if all((current / marker).exists() for marker in MARKER_FILES):
-            return current
-    return None
+def bundled_extension_root() -> Path:
+    return skill_root() / XHS_EXTENSION_DIR
 
 
 def resolve_repo_root(explicit: str | None) -> Path:
@@ -90,7 +92,7 @@ def resolve_repo_root(explicit: str | None) -> Path:
 
 
 def default_workspace_root() -> Path:
-    return codex_home() / "workspaces" / "gamerss-daily-publish"
+    return agent_home() / "workspaces" / "gamerss-daily-publish"
 
 
 def materialize_bundled_repo() -> Path:
@@ -198,26 +200,16 @@ def ensure_uv() -> str:
 
 
 def ensure_xhs_skill() -> Path:
-    xhs_dir = codex_home() / "skills" / XHS_SKILL_NAME
+    xhs_dir = agent_home() / "skills" / XHS_SKILL_NAME
     if xhs_dir.exists():
         return xhs_dir
 
-    installer = codex_home() / "skills" / ".system" / "skill-installer" / "scripts" / "install-skill-from-github.py"
-    if not installer.exists():
-        fail(f"未找到 skill-installer: {installer}")
+    agent_home().mkdir(parents=True, exist_ok=True)
+    xhs_dir.parent.mkdir(parents=True, exist_ok=True)
+    if not shutil.which("git"):
+        fail("未找到 git，无法自动安装 xiaohongshu-skills。请先安装 git 后重试。")
 
-    run(
-        [
-            "python3",
-            str(installer),
-            "--repo",
-            XHS_SKILL_REPO,
-            "--path",
-            ".",
-            "--name",
-            XHS_SKILL_NAME,
-        ]
-    )
+    run(["git", "clone", f"https://github.com/{XHS_SKILL_REPO}.git", str(xhs_dir)])
     return xhs_dir
 
 
@@ -234,6 +226,19 @@ def ensure_xhs_patches(xhs_dir: Path) -> None:
     target_publish = xhs_dir / "scripts" / "xhs" / "publish.py"
     if publish_patch.exists() and target_publish.exists():
         target_publish.write_text(publish_patch.read_text(encoding="utf-8"), encoding="utf-8")
+
+
+def ensure_xhs_extension(xhs_dir: Path) -> None:
+    source_dir = bundled_extension_root()
+    if not source_dir.exists():
+        return
+
+    target_dir = xhs_dir / "extension"
+    target_dir.mkdir(parents=True, exist_ok=True)
+
+    for source in source_dir.iterdir():
+        if source.is_file():
+            shutil.copy2(source, target_dir / source.name)
 
 
 def parse_last_json_blob(text: str) -> dict | None:
@@ -322,6 +327,7 @@ def main() -> None:
     xhs_dir = ensure_xhs_skill()
     ensure_xhs_dependencies(uv_bin, xhs_dir)
     ensure_xhs_patches(xhs_dir)
+    ensure_xhs_extension(xhs_dir)
     ensure_xhs_logged_in(uv_bin, xhs_dir)
     run_publish(repo_root, xhs_dir)
     news_dir = latest_news_dir(repo_root)

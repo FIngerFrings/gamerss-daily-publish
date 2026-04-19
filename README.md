@@ -24,6 +24,7 @@
 - `scripts/run_pipeline.py`: 总入口，负责环境自举和执行生成/发布
 - `assets/gamerss-template/`: 内置 GameRSS 模板
 - `assets/xhs-patches/`: 对 `xiaohongshu-skills` 的兼容补丁
+- `assets/xhs-extension/`: 随仓库提供的 `XHS Bridge` 浏览器扩展副本
 - `references/manual-setup.md`: 首次使用时仍需手动处理的部分
 - `agents/openai.yaml`: skill 的展示配置
 
@@ -63,7 +64,9 @@
 ### 方式一：直接复制到本地 skills 目录
 
 ```bash
-cp -R gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
+export AGENT_HOME="${AGENT_HOME:-$HOME/.agent-home}"
+mkdir -p "$AGENT_HOME/skills"
+cp -R gamerss-daily-publish "$AGENT_HOME/skills/gamerss-daily-publish"
 ```
 
 ### 方式二：用软链接安装
@@ -71,7 +74,9 @@ cp -R gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
 适合本地开发和迭代：
 
 ```bash
-ln -s /abs/path/to/gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
+export AGENT_HOME="${AGENT_HOME:-$HOME/.agent-home}"
+mkdir -p "$AGENT_HOME/skills"
+ln -s /abs/path/to/gamerss-daily-publish "$AGENT_HOME/skills/gamerss-daily-publish"
 ```
 
 安装完成后，重启你的 agent 运行环境，让它重新加载 skill。
@@ -81,14 +86,16 @@ ln -s /abs/path/to/gamerss-daily-publish ~/.codex/skills/gamerss-daily-publish
 ### 只生成每日资讯
 
 ```bash
-cd ~/.codex/skills/gamerss-daily-publish
+export AGENT_HOME="${AGENT_HOME:-$HOME/.agent-home}"
+cd "$AGENT_HOME/skills/gamerss-daily-publish"
 python3 scripts/run_pipeline.py --mode generate
 ```
 
 ### 生成并发布到小红书
 
 ```bash
-cd ~/.codex/skills/gamerss-daily-publish
+export AGENT_HOME="${AGENT_HOME:-$HOME/.agent-home}"
+cd "$AGENT_HOME/skills/gamerss-daily-publish"
 export GAMERSS_AI_API_KEY="your_api_key"
 python3 scripts/run_pipeline.py --mode publish
 ```
@@ -106,7 +113,7 @@ python3 scripts/run_pipeline.py --repo-root /abs/path/to/GameRSS --mode publish
 默认会把 GameRSS 工作副本落到：
 
 ```text
-$CODEX_HOME/workspaces/gamerss-daily-publish/GameRSS
+$AGENT_HOME/workspaces/gamerss-daily-publish/GameRSS
 ```
 
 生成的内容产物位于该目录下的 `news_*` 文件夹中。
